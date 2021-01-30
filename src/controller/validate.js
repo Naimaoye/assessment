@@ -34,7 +34,7 @@ export default class check {
             } else {
             if(typeof(data) == 'string'){
                 const fieldName = rule['field']
-                if(fieldName == 'data'){
+                if(fieldName == data){
                 if(rule['condition'] == 'eq'){
                     if(data == rule['condition_value']){
                         res.status(200).send({
@@ -203,10 +203,10 @@ export default class check {
             })
             }
 
-            } else if(typeof(data) == 'object'){
+            } else if(Object.prototype.toString.call(data) == '[object Object]'){
                 const fieldName = rule['field'];
                 if(fieldName.includes(".")){
-                    const splitted = fileName.split(".");
+                    const splitted = fieldName.split(".");
                     const left = splitted[0];
                     const right = splitted[1];
                 if (data.hasOwnProperty(left) && data[left].hasOwnProperty(right)){
@@ -219,7 +219,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": fieldName,
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": 'eq',
                                 "condition_value": rule['condition_value'],
                                 }
@@ -233,7 +233,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": fieldName,
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": "eq",
                                 "condition_value": rule['condition_value']
                                 }
@@ -250,7 +250,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": rule['field'],
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": 'neq',
                                 "condition_value": rule['condition_value'],
                                 }
@@ -263,8 +263,8 @@ export default class check {
                             "data": {
                                 "validation": {
                                 "error": false,
-                                "field": fieldName,
-                                "field_value": fieldName,
+                                "field": data[left][right],
+                                "field_value": data[left][right],
                                 "condition": "neq",
                                 "condition_value": rule['condition_value']
                                 }
@@ -282,7 +282,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": rule['field'],
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": 'gt',
                                 "condition_value": rule['condition_value'],
                                 }
@@ -296,7 +296,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": fieldName,
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": "gt",
                                 "condition_value": rule['condition_value']
                                 }
@@ -315,7 +315,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": rule['field'],
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": 'gte',
                                 "condition_value": rule['condition_value'],
                                 }
@@ -329,7 +329,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": fieldName,
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": "gte",
                                 "condition_value": rule['condition_value']
                                 }
@@ -348,7 +348,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": rule['field'],
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": 'contains',
                                 "condition_value": rule['condition_value'],
                                 }
@@ -362,7 +362,7 @@ export default class check {
                                 "validation": {
                                 "error": false,
                                 "field": fieldName,
-                                "field_value": fieldName,
+                                "field_value": data[left][right],
                                 "condition": "contains",
                                 "condition_value": rule['condition_value']
                                 }
@@ -393,7 +393,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": 'eq',
                                     "condition_value": rule['condition_value'],
                                     }
@@ -407,7 +407,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": "eq",
                                     "condition_value": rule['condition_value']
                                     }
@@ -424,7 +424,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": rule['field'],
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": 'neq',
                                     "condition_value": rule['condition_value'],
                                     }
@@ -438,7 +438,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": "neq",
                                     "condition_value": rule['condition_value']
                                     }
@@ -470,7 +470,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": "gt",
                                     "condition_value": rule['condition_value']
                                     }
@@ -489,7 +489,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": rule['field'],
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": 'gte',
                                     "condition_value": rule['condition_value'],
                                     }
@@ -503,7 +503,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": "gte",
                                     "condition_value": rule['condition_value']
                                     }
@@ -522,7 +522,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": rule['field'],
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": 'contains',
                                     "condition_value": rule['condition_value'],
                                     }
@@ -536,7 +536,7 @@ export default class check {
                                     "validation": {
                                     "error": false,
                                     "field": fieldName,
-                                    "field_value": fieldName,
+                                    "field_value": data[fieldName],
                                     "condition": "contains",
                                     "condition_value": rule['condition_value']
                                     }
@@ -557,8 +557,8 @@ export default class check {
                 }
 
             }
-
-            } else if(Array.isArray(data)){
+            } else if(Object.prototype.toString.call(data) == '[object Array]'){
+                console.log("here");
                 const fieldName = rule['field']
                 if(data.includes(fieldName)){
                         if(rule['condition'] == 'eq'){
@@ -570,7 +570,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": 'eq',
                                         "condition_value": rule['condition_value'],
                                         }
@@ -584,7 +584,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": "eq",
                                         "condition_value": rule['condition_value']
                                         }
@@ -601,7 +601,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": rule['field'],
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": 'neq',
                                         "condition_value": rule['condition_value'],
                                         }
@@ -615,7 +615,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": "neq",
                                         "condition_value": rule['condition_value']
                                         }
@@ -633,7 +633,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": rule['field'],
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": 'gt',
                                         "condition_value": rule['condition_value'],
                                         }
@@ -647,7 +647,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": "gt",
                                         "condition_value": rule['condition_value']
                                         }
@@ -665,7 +665,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": rule['field'],
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": 'gte',
                                         "condition_value": rule['condition_value'],
                                         }
@@ -673,13 +673,13 @@ export default class check {
                                 })
                             } else {
                                 res.status(400).send({
-                                    "message": `field ${fieldName}failed validation.`,
+                                    "message": `field ${fieldName} failed validation.`,
                                     "status": "error",
                                     "data": {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": "gte",
                                         "condition_value": rule['condition_value']
                                         }
@@ -697,7 +697,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": rule['field'],
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": 'contains',
                                         "condition_value": rule['condition_value'],
                                         }
@@ -711,7 +711,7 @@ export default class check {
                                         "validation": {
                                         "error": false,
                                         "field": fieldName,
-                                        "field_value": data,
+                                        "field_value": data[fieldName],
                                         "condition": "contains",
                                         "condition_value": rule['condition_value']
                                         }
