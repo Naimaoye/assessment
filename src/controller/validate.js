@@ -724,6 +724,11 @@ export default class check {
 
             } else {
                 // other data types check
+                res.status(400).send({
+                        "message": "Invalid JSON payload passed.",
+                        "status": "error",
+                        "data": null
+                })
             }
         }
     }
