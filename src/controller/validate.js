@@ -25,7 +25,13 @@ export default class check {
             })
 
         } else {
-            if(typeof rule )
+            if(typeof(rule) !== 'object' ){
+                res.status(400).send({
+                    "message": "rule should be an object.",
+                    "status": "error",
+                    "data": null
+                })
+            } else {
             if(typeof(data) == 'string'){
                 const fieldName = rule['field']
                 if(fieldName == 'data'){
@@ -731,5 +737,6 @@ export default class check {
                 })
             }
         }
+    }
     }
 }
